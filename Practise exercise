@@ -1,0 +1,336 @@
+Question 1: Drivers are concerned with the mileage obtained by their automobiles. One driver has kept track of several tankfuls of gasoline by recording miles driven 
+and gallons used for each tankful. Develop a C++ program that uses a while statement to input the miles driven and gallons used for each tankful.
+The program should calculate and display the miles per gallon obtained for each tankful and print the combined miles per gallon obtained for all tankfuls up to this point.
+
+Solution:
+#include <iostream>
+#include<cmath>
+using namespace std;
+int main(){
+ // programm to find mileage
+ float miles,gall,res,total,totalmiles,totalgall,totalres;  //gal wil take gallons
+ while (  miles!=-1    )
+ {
+ 	  // we want programm end instantaneously as soon as user put -1 so we put if inside while statement
+          cout<<"Enter the miles used (-1 to quit) : "; 
+ 	      cin>>miles;
+ 	      if(miles!=-1)
+	      {
+ 	          totalmiles=totalmiles + miles; //because we have already entered miles we will use totalmiles to find MPG
+ 	          cout<<"Enter gallons : ";
+ 	          cin>>gall;
+ 	          totalgall=totalgall+gall;
+ 	
+ 	          res=miles/gall;              // res will calculate MPG only for given tankful
+ 	          cout<<"MPG this tankful :"<<" "<<res<<endl;
+              totalres=totalmiles/totalgall;
+              cout<<"Total MPG : "<<" "<<totalres<<endl;
+ 	          cout<<endl;
+ 	          cout<<endl; 
+ 	      }
+ 	
+ 	    else 
+ 	    { 
+ 		cout<<"Program quit successfully";
+	    }
+  
+ }
+ 
+ return 0;
+}
+
+Question 2: Calculate the value of pi from the infinite series
+
+pi = 4 - 4/3 + 4/5 - 4/7 + 4/9 - 4/11 ....
+
+Print a table that shows the approximate value of pi after each of the first 1,000 terms of this series
+
+
+Solution
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+using namespace std;
+int main(){
+int i=1;
+float n=2;
+float p,r,q=1;
+float pi,f;
+cout<<" Term "<<setw( 10 )<<"  pi  "<<endl;
+while (i<=1000)
+{
+   // the given series form  a sequence and it was (-1)^n *4/odd nums and then next term was formed by adding previous terms 
+   // so same logic is used to make programm
+    p=pow(-1,n);
+    r=4/q;  // q should remain odd so always increased by 2
+	pi=p*r;
+	f=f+pi;
+	cout<<setw(3)<<i<<setw(15)<<f<<endl;
+	q++;
+	q++;
+	i++;
+	n++;
+	
+	if(i%1000==1)
+	{
+		cout<<"value of pi after 1000 terms is  "<<f<<endl;
+	}
+	
+}
+
+ return 0;
+ 
+}
+
+Question 3: Write a program to print Fibonacci series till the nth term, where n is input by user: 0 1 1 2 3 5 8 13 24.....
+
+Solution:
+#include <iostream>
+#include<cmath>
+#include<iomanip>
+using namespace std;
+int main(){
+	// PROGRAMM TO PRINT FIBBONACHI SERIES UPTO A NUMBER
+	//fibonachi series can be formed if two num let say 0 and 1 is added ..now ans of addition 0+1=1 now we have to use this ans 1 also the previous num
+	// that is 1 in this case also...so 1+1=2 will be nxt term ..so next we will use 2 as ans and previous term 1 so we will get 2 +1=3 and so on..this way
+	int n,x=0,y=1,r=0;
+	cout<<"Enter a term upto which you want to print fibonacci series :"<<" ";
+	cin>>n;
+	 
+	 for(int i=0 ;i!=n ;i++ )
+       {
+	   
+        cout<<r<<endl;
+        x=y; // swaping of nums ..
+        y=r; //swaping....
+        r=x+y;	 	
+      }
+	return 0;
+}
+
+**AIRPLANE RESERVATION SYSTEM**
+Question 4: A small airline has just purchased a computer for its new automated reservations system. You have been asked to program the new system. 
+You are to write a program to assign seats on each flight of the airline's only plane (capacity: 10 seats).
+Your program should display the following menu of alternatives Please type 1 for "First Class" and Please type 2 for "Economy". If the person types 1,
+your program should assign a seat in the first class section (seats 1-5). If the person types 2, your program should assign a seat in the economy section (seats 6-10). 
+Your program should print a boarding pass indicating the person's seat number and whether it is in the first class or economy section of the plane.
+Use a one-dimensional array to represent the seating chart of the plane. Initialize all the elements of the array to 0 to indicate that all seats are empty.
+As each seat is assigned, set the corresponding elements of the array to 1 to indicate that the seat is no longer available.
+Your program should, of course, never assign a seat that has already been assigned. When the first class section is full, your program should ask the person if it is acceptable
+to be placed in the economy section (and vice versa). If yes, then make the appropriate seat assignment. If no, then print the message "Next flight leaves in 3 hours".
+
+Solution:
+#include<iostream>
+#include<cmath>
+#include<iomanip>
+#include<string>
+using namespace std;
+int main()
+{
+ 
+ int flight [10]={0,0,0,0,0,0,0,0,0,0};   // 10 seats of plain initialy all un bookes
+ int choice=0 ,fc=1, ec=6;               // fc= firstclass seating limit and ec = economy class limit
+ int x=0 , y=5;                         // x and y will help as index by calling elements in flight array
+ char check ,condition;             // check will check if user want to book more seats or not and condition will check whether user want to shift class or not
+
+
+cout<<"PRESS [1] for FIRSTCLASS SECTION\n";
+cout<<"PRESS [2] for ECONOMYCLASS SECTION\n";
+cout<<"PRESS [3] to  Quit program.\n";
+
+do
+{
+ 
+ cout<<"PLEASE SELECT CLASS OF YOUR CHOICE .1 --> FIRSTCLASS ; 2 --> ECONOMYCLASS"<<endl;
+ cin>>choice;
+ cout<<endl;
+ cout<<endl;
+  if (choice==1 && fc<=5)      // if seats are available in firstclass ..seat given
+  {
+ 	 cout<<"YOUR SEAT NUMBER IS "<<" "<<fc<<" "<<" in FIRSTCLASS"<<endl;
+ 	 cout<<endl;
+ 	 fc++;             // fc seat number is increased
+ 	 flight[x]=1;     // array element set to 1 when seat is occupied
+ 	 cout<<endl;
+ 	 cout<<endl;
+ 	 cout<<"                "<<"BOARDING TABLE OF PLAIN IS ......   : "<<endl;
+     cout<<endl;
+     cout<<"FIRSTCLASS TABLE (0 =AVAILABLE SEAT , 1 =UNAVAILABLE SEAT)"<<endl;
+ 
+ 
+      for (int j=0; j<=4 ;j++)  // boarding table printed after each seat is booked 
+      {
+	     cout<<"seat number "<<" "<<j+1<<"  "<<flight[j]<<endl;
+      }
+
+     cout<<endl;
+     cout<<endl;
+     cout<<"ECONOMYCLASS TABLE (0 =AVAILABLE SEAT , 1 =UNAVAILABLE SEAT)"<<endl;
+ 
+ 
+      for (int K=5; K<=9 ;K++)
+      {
+	     cout<<"seat number "<<" "<<K+1<<"  "<<flight[K]<<endl;
+      }  
+     
+     x++;  // array flight index got incremented
+ 	 cout<<"DO YOU WANT TO CONTINUE ? [y/n]"<<endl;
+ 	 cin>>check;                    // programm continues till user say he do not want anymore seat
+ }
+ 
+  else if (choice==1 && fc>5)  // if no seats are available in 1stclass section
+  {
+	 cout<<"NO seat available in FIRSTCLASS"<<endl;
+	 cout<<"DO YOU WANT SEAT IN ECONOMY ? [Y/N]"<<endl;
+	 cin>>condition;
+	 cout<<endl;
+	
+
+
+     if ((condition =='Y'|| condition =='y' ) && ec<=10 ) // if seats are available in economy class then alowt seat
+     {
+	   cout<<"YOUR SEAT NUMBER IS "<<" "<<ec<<" "<<"IN ECONOMYCLASS"<<endl;
+	   cout<<endl;
+	   ec++;  // increase seat number in economy section
+	   flight [y]=1; // fill array flight with  1 when one seat is filled in this section
+	   cout<<endl;
+	   cout<<"                "<<"BOARDING TABLE OF PLAIN IS ......   : "<<endl; // print boarding table of plain
+       cout<<endl;
+       cout<<"FIRSTCLASS TABLE (0 =AVAILABLE SEAT , 1 =UNAVAILABLE SEAT)"<<endl;
+ 
+       for (int j=0; j<=4 ;j++)
+       {
+	      cout<<"seat number "<<" "<<j+1<<"  "<<flight[j]<<endl;
+       }
+    
+       cout<<endl;
+       cout<<endl;
+       cout<<"ECONOMYCLASS TABLE (0 =AVAILABLE SEAT , 1 =UNAVAILABLE SEAT)"<<endl;
+ 
+       for (int K=5; K<=9 ;K++)
+       {	
+	      cout<<"seat number "<<" "<<K+1<<"  "<<flight[K]<<endl;
+       } 
+	   y++;  // index that fills ecomony seat when booked =1 is increased
+	   cout<<"DO YOU WANT TO CONTINUE ? [Y/N]"<<endl;
+	   cin>>check;	
+	   cout<<endl;
+   }
+
+   else if ((condition =='Y'|| condition =='y' ) && ec>10 )
+    {
+	   cout<<"NO SEAT AVAILABLE IN ECONOMYCLASS ALSO .NEXT FLIGHT IN 3 HOUR"<<endl;
+	   return 0;
+    }
+
+    else if ((condition !='Y'|| condition !='y' ) )
+    {
+	   cout<<"NEXT FLIGHT IN 3 HOURS"<<endl;
+	   return 0;
+    }
+
+   }
+//****************************************************************************************************//
+
+  if (choice==2 && ec<=10) // if seats are available in economic section alot a seat
+ {
+	  cout<<"YoUR SEAT NUMBER IS "<<" "<<ec<<" "<<"IN ECONOMYCLASS"<<endl;
+	  cout<<endl;
+	  ec++; // seat num increased by 1 
+	  flight [y]=1; // flight array element set to 1 when one seat is booked
+	  // printing of boarding table
+	  cout<<"                "<<"BOARDING TABLE OF PLAIN IS ......   : "<<endl;
+      cout<<endl;
+      cout<<"FIRSTCLASS TABLE (0 =AVAILABLE SEAT , 1 =UNAVAILABLE SEAT)"<<endl;
+ 
+       for (int j=0; j<=4 ;j++)
+        {
+	       cout<<"seat number "<<" "<<j+1<<"  "<<flight[j]<<endl;
+        }
+        
+      cout<<endl;
+      cout<<endl;
+      cout<<"ECONOMYCLASS TABLE (0 =AVAILABLE SEAT , 1 =UNAVAILABLE SEAT)"<<endl;
+   
+       for (int K=5; K<=9 ;K++)
+        {
+	
+	      cout<<"seat number "<<" "<<K+1<<"  "<<flight[K]<<endl;
+        }  
+	  y++; // index that fills array to 1 in econmic section when seat is booked is incresed
+	  cout<<" DO YOU WANT TO CONTINUE ? [Y/N]"<<endl;
+	  cin>>check;	
+	  cout<<endl;
+ }
+
+  else if (choice==2 && ec>10) // if no seat is available in economic section
+ {
+     cout<<"NO SEAT AVAILABLE IN ECONOMYCLASS .DO U WANT SEAT IN FIRSTCLASS ? [y/n]"<<endl;
+	 cin>>condition;
+	 cout<<endl; 
+	 
+      if ((condition=='Y'|| condition=='y' )&& fc<=5 ) // if seat is empty in 1stclass alot a seat
+      {
+	    cout<<"YOUR SEAT NUMBER IS "<<" "<<fc<<" IN FIRSTCLASS"<<endl;
+	    fc++;
+	    flight[x]=1;
+	    cout<<"                "<<"BOARDING TABLE OF PLAIN IS ......   : "<<endl;
+        cout<<endl;
+        cout<<"FIRSTCLASS TABLE (0 =AVAILABLE SEAT , 1 =UNAVAILABLE SEAT)"<<endl;
+ 
+         for (int j=0; j<=4 ;j++)
+          {
+	
+	         cout<<"seat number "<<" "<<j+1<<"  "<<flight[j]<<endl;
+          }
+
+        cout<<endl;
+        cout<<endl;
+        cout<<"ECONOMYCLASS TABLE (0 =AVAILABLE SEAT , 1 =UNAVAILABLE SEAT)"<<endl;
+ 
+ 
+           for (int K=5; K<=9 ;K++)
+            {
+	
+	          cout<<"seat number "<<" "<<K+1<<"  "<<flight[K]<<endl;
+            } 
+	     x++;
+	     cout<<"DO YOU WANT TO CONTINUE ? [Y/N]"<<endl;
+	     cin>>check;
+	
+     }
+
+      else if ((condition=='Y'|| condition=='y' )&& fc>5 )
+      {
+	    cout<<"NO SEAT AVAILABLE IN FIRSTCLASS ALSO. NEXT FLIGHT IN 3 HOURS "<<endl;
+	    return 0;
+      }
+
+      else if ((condition!='Y'|| condition!='y' ) )
+      {
+	    cout<<"NEXT FLIGHT IN 3 HOURS "<<endl;
+	    return 0;
+      }
+ 
+ }
+
+   else if(choice>2) // if user has entered invalid section number
+  {
+	cout<<"INVALID INPUT"<<endl;
+  }
+
+
+}
+ while (check =='Y'|| check=='y'); // programm continues untill user stop him by himself before 10 seats are reserved
+ 
+ cout<<" GOOD BYE!!";
+ return 0;
+	
+}
+
+
+
+
+
+
+
